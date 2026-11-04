@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ca.sheridan.podnarm.beans.Mission;
-import ca.sheridan.podnarm.database.DatabaseAccess;
+import ca.sheridan.podnarm.database.TestDatabaseAccess;
 
 @Controller
 public class HomeController {
 
     @Autowired
-    private DatabaseAccess da;
+    private TestDatabaseAccess da;
 
     @GetMapping("/")
     public String index(Model model, HttpSession session) {
