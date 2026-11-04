@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Missions</title>
+    <style>
+        body { background-color: #c5d8e1; text-align: center; font-family: sans-serif; }
+        table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 20px auto;
+            background-color: #3b97cd;
+            border: 4px solid black;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            font-size: 1.1em;
+        }
+        a { color: #3b0066; }
+    </style>
+</head>
+<body>
+    <h1 th:text="'Here are the missions for ' + ${agent}">Here are the missions for</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Mission Title</th>
+                <th>Gadget 1</th>
+                <th>Gadget 2</th>
+                <th>Operations</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="m : ${missions}">
+                <td th:text="${m.title}">Title</td>
+                <td th:text="${m.gadget1}">Gadget 1</td>
+                <td th:text="${m.gadget2}">Gadget 2</td>
+                <td>
+                    <a th:href="@{/editMission/{id}(id=${m.id})}">edit</a>
+                    <a th:href="@{/deleteMission/{id}(id=${m.id})}">delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br/>
+    <a th:href="@{/}">Back to home</a>
+</body>
+</html>

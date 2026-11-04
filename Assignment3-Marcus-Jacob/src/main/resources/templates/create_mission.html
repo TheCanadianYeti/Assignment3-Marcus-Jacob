@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create the Mission</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+            margin: 0;
+            font-family: serif;
+        }
+        .container {
+            width: 600px;
+            background-color: #3b93c8;
+            border: 2px solid black;
+            text-align: center;
+            padding: 25px 30px;
+        }
+        h1 { font-size: 26px; margin-bottom: 25px; }
+        h2 { font-size: 20px; margin: 20px 0 15px 0; }
+        .form-row {
+            margin: 8px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        label {
+            width: 110px;
+            text-align: right;
+            margin-right: 10px;
+            font-size: 15px;
+        }
+        input[type="text"], select { width: 170px; box-sizing: border-box; }
+        .btn-submit { margin-top: 15px; padding: 2px 8px; }
+        .home-link {
+            display: block;
+            margin-top: 15px;
+            color: #3f1981;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Create the Mission</h1>
+
+    <form th:action="@{/createMission}" th:object="${mission}" method="post">
+        <div class="form-row">
+            <label>Mission title:</label>
+            <input type="text" th:field="*{title}" required>
+        </div>
+
+        <div class="form-row">
+            <label>Agent:</label>
+            <select th:field="*{agent}">
+                <option th:each="agt : ${agents}" th:value="${agt}" th:text="${agt}"></option>
+            </select>
+        </div>
+
+        <h2>Enter the gadgets</h2>
+
+        <div class="form-row">
+            <label>Gadget 1:</label>
+            <input type="text" th:field="*{gadget1}">
+        </div>
+
+        <div class="form-row">
+            <label>Gadget 2:</label>
+            <input type="text" th:field="*{gadget2}">
+        </div>
+
+        <div>
+            <input type="submit" value="Create Mission!" class="btn-submit">
+        </div>
+    </form>
+
+    <a th:href="@{/}" class="home-link">Back to home</a>
+</div>
+
+</body>
+</html>

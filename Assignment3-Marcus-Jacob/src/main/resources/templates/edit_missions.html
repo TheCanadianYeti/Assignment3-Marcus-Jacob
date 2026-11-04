@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Mission</title>
+    <style>
+        body { background-color: #c5d8e1; text-align: center; font-family: sans-serif; }
+        .box {
+            border: 4px solid black;
+            background-color: #3b97cd;
+            width: 70%;
+            margin: 40px auto;
+            padding: 30px;
+        }
+        a { color: #3b0066; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1 th:text="'Edit a Mission for ' + ${mission.agent}">Edit a Mission</h1>
+
+        <form th:action="@{/updateMission}" th:object="${mission}" method="post">
+            <input type="hidden" th:field="*{id}" />
+            <input type="hidden" th:field="*{agent}" />
+
+            <label>Mission title: </label>
+            <input type="text" th:field="*{title}" /><br/>
+
+            <h2>Edit the gadgets</h2>
+
+            <label>Gadget 1: </label>
+            <input type="text" th:field="*{gadget1}" /><br/>
+            <label>Gadget 2: </label>
+            <input type="text" th:field="*{gadget2}" /><br/><br/>
+
+            <button type="submit">Updated Mission!</button>
+        </form>
+
+        <br/><br/>
+        <a th:href="@{/}">Back to home</a>
+    </div>
+</body>
+</html>
