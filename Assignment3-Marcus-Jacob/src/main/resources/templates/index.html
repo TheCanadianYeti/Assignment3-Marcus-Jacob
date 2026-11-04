@@ -44,7 +44,7 @@
     <a th:href="@{/createMission}" class="btn-link">Create a Mission</a>
 
     <h2>View Mission for:</h2>
-    <form th:action="@{/viewMissions}" method="post">
+    <form th:action="@{/selectAgent}" method="post">
         <select name="agent">
             <option th:each="agt : ${agents}" th:value="${agt}" th:text="${agt}"></option>
         </select>

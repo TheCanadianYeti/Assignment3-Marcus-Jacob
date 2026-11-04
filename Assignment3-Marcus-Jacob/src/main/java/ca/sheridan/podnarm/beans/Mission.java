@@ -1,5 +1,7 @@
 package ca.sheridan.podnarm.beans;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,7 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Mission {
+public class Mission implements Serializable{
+	
+	private static final long serialVersionUID=1L;
 	private int id;
 	private String agent;
 	private String title;
