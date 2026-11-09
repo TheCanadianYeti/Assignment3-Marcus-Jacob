@@ -1,9 +1,12 @@
 package ca.sheridan.podnarm.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.test.web.servlet.MockMvc;
 
+import ca.sheridan.podnarm.beans.Mission;
 import ca.sheridan.podnarm.database.DatabaseAccess;
 
 @SpringBootTest
@@ -51,12 +55,26 @@ public class TestHomeController {
 	}//testEditMissionPage
 	
 	@Test
-	public void testHandleUpdateMission() throws Exception{
-		
+	public void testHandleUpdateMission() throws Exception {
+	    Mission mission = new Mission();
+	    mission.setId(1);
+	    mission.setAgent("Johnny English");
+	    mission.setTitle("Updated Mission");
+
+	    mockmvc.perform(post("/updateMission")
+	            .flashAttr("mission", mission))
+	            .andExpect(status().isFound())
+	            .andExpect(redirectedUrl("/viewMissions"))
+	            .andDo(print());
 	}//testHandleUpdateMission
-	
+
 	@Test
-	public void testDeleteMission() throws Exception{
-		
+	public void testDeleteMission() throws Exception {
+	    int id = 1;
+
+	    mockmvc.perform(get("/deleteMission/{id}", id))
+	            .andExpect(status().isFound())
+	            .andExpect(redirectedUrl("/viewMissions"))
+	            .andDo(print());
 	}//testDeleteMission
 }//TestHomeController
